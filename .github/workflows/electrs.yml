@@ -2,10 +2,10 @@ name: Electrs
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'electrs/Dockerfile'
-      - 'electrs/VERSION'
+      - "electrs/Dockerfile"
+      - "electrs/VERSION"
 
 jobs:
   electrs:
@@ -13,24 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v2
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Setup VERSION
-      run: |
+      - name: Setup VERSION
+        run: |
           export VERSION=$(cat electrs/VERSION)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-    - name: Docker build
-      run: docker build --build-arg VRS=v${VERSION} -f $GITHUB_WORKSPACE/electrs/Dockerfile -t ghcr.io/farcaster-project/containers/electrs:latest -t ghcr.io/farcaster-project/containers/electrs:${VERSION} $GITHUB_WORKSPACE/electrs
+      - name: Docker build
+        run: docker build --build-arg VRS=v${VERSION} -f $GITHUB_WORKSPACE/electrs/Dockerfile -t ghcr.io/UnstoppableSwap/containers/electrs:latest -t ghcr.io/UnstoppableSwap/containers/electrs:${VERSION} $GITHUB_WORKSPACE/electrs
 
-    - name: Docker push to GitHub Packages
-      run:  |
-          docker push ghcr.io/farcaster-project/containers/electrs:$VERSION
-          docker push ghcr.io/farcaster-project/containers/electrs:latest
+      - name: Docker push to GitHub Packages
+        run: |
+          docker push ghcr.io/UnstoppableSwap/containers/electrs:$VERSION
+          docker push ghcr.io/UnstoppableSwap/containers/electrs:latest

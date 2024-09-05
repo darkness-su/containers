@@ -2,10 +2,10 @@ name: Monero LWS
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'monero-lws/Dockerfile'
-      - 'monero-lws/TAG'
+      - "monero-lws/Dockerfile"
+      - "monero-lws/TAG"
 
 jobs:
   monero-lws:
@@ -13,24 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v2
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Setup TAG
-      run: |
+      - name: Setup TAG
+        run: |
           export TAG=$(cat monero-lws/TAG)
           echo "TAG=$TAG" >> $GITHUB_ENV
 
-    - name: Docker build
-      run: docker build --build-arg TAG=${TAG} -f $GITHUB_WORKSPACE/monero-lws/Dockerfile -t ghcr.io/farcaster-project/containers/monero-lws:monerod-${TAG} -t ghcr.io/farcaster-project/containers/monero-lws:latest $GITHUB_WORKSPACE/monero-lws
+      - name: Docker build
+        run: docker build --build-arg TAG=${TAG} -f $GITHUB_WORKSPACE/monero-lws/Dockerfile -t ghcr.io/UnstoppableSwap/containers/monero-lws:monerod-${TAG} -t ghcr.io/UnstoppableSwap/containers/monero-lws:latest $GITHUB_WORKSPACE/monero-lws
 
-    - name: Docker push to GitHub Packages
-      run:  |
-          docker push ghcr.io/farcaster-project/containers/monero-lws:monerod-${TAG}
-          docker push ghcr.io/farcaster-project/containers/monero-lws:latest
+      - name: Docker push to GitHub Packages
+        run: |
+          docker push ghcr.io/UnstoppableSwap/containers/monero-lws:monerod-${TAG}
+          docker push ghcr.io/UnstoppableSwap/containers/monero-lws:latest

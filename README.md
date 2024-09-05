@@ -2,7 +2,7 @@
 
 # Containers
 
-A list of Docker images built for supporting **@farcaster-project** integration tests and help bootstrapping a swap environment.
+A list of Docker images built for supporting **@UnstoppableSwap** integration tests and help bootstrapping a swap environment.
 
 - **bitcoin-core**: [`bitcoin-core` image](./bitcoin-core/)
 - **electrs**: [`electrs` image](./electrs/)
@@ -19,7 +19,7 @@ The later support adding `services` to a `job` described in yaml format, the doc
 To be able to reuse these images in other contexts no `ENTRYPOINT` is specified. Containers can be created by changing the `CMD` argument, e.g.
 
 ```
-docker run --rm ghcr.io/farcaster-project/containers/bitcoin-core:latest /usr/bin/bitcoind\
+docker run --rm ghcr.io/UnstoppableSwap/containers/bitcoin-core:latest /usr/bin/bitcoind\
     -testnet\
     -server\
     -rest

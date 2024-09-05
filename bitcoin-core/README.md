@@ -43,7 +43,7 @@ Add a service named `bitcoind` with a named volume `bitcoind-data` mounted on `/
 ```yaml
 services:
   bitcoind:
-    image: ghcr.io/farcaster-project/containers/bitcoin-core:23.0
+    image: ghcr.io/UnstoppableSwap/containers/bitcoin-core:23.0
     env:
       NETWORK: regtest
     volumes:
@@ -60,14 +60,14 @@ You probably also want to run the job in a container to bind the same named volu
 Pull the image, create a named volume, and finally create the container (here named `bitcoind`).
 
 ```
-docker pull ghcr.io/farcaster-project/containers/bitcoin-core:23.0
+docker pull ghcr.io/UnstoppableSwap/containers/bitcoin-core:23.0
 mkdir data
 
 docker create -p 18443:18443 -p 18444:18444\
     --name bitcoind\
     --env NETWORK=regtest\
     -v $(pwd)/data:/data\
-    ghcr.io/farcaster-project/containers/bitcoin-core:23.0
+    ghcr.io/UnstoppableSwap/containers/bitcoin-core:23.0
 
 docker start bitcoind
 sudo cat data/regtest/.cookie

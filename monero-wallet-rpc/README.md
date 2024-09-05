@@ -32,44 +32,44 @@ Available listening container ports:
 
 Wallet RPC is binded to `0.0.0.0` and the chosen **WALLET_RPC_PORT**, you probably want to expose the chosen port outside the container with `-p [hostPort]:[containerPort]`.
 
-The `monero-wallet-cli` binary is also installed, you can use `docker run -it ghcr.io/farcaster-project/containers/monero-wallet-rpc:0.18.2.2 /bin/bash` to use it stand alone or `docker exec -it {monero-wallet-rcp} /bin/bash` to enter a running container.
+The `monero-wallet-cli` binary is also installed, you can use `docker run -it ghcr.io/UnstoppableSwap/containers/monero-wallet-rpc:0.18.2.2 /bin/bash` to use it stand alone or `docker exec -it {monero-wallet-rcp} /bin/bash` to enter a running container.
 
 ## GitHub Action usage
 
 ```yaml
 services:
   monerod:
-    image: ghcr.io/farcaster-project/containers/monerod:0.18.2.2
+    image: ghcr.io/UnstoppableSwap/containers/monerod:0.18.2.2
     env:
       NETWORK: regtest
       OFFLINE: --offline
       DIFFICULTY: 1
   monero-wallet-rpc:
-    image: ghcr.io/farcaster-project/containers/monero-wallet-rpc:0.18.2.2
+    image: ghcr.io/UnstoppableSwap/containers/monero-wallet-rpc:0.18.2.2
     env:
       MONERO_DAEMON_ADDRESS: monerod:18081
       WALLET_RPC_PORT: 18083
 ```
 
-## Standalone usage with [`containers/monerod`](https://github.com/farcaster-project/containers/tree/main/monerod) image
+## Standalone usage with [`containers/monerod`](https://github.com/UnstoppableSwap/containers/tree/main/monerod) image
 
 ```
-docker pull ghcr.io/farcaster-project/containers/monerod:0.18.2.2
-docker pull ghcr.io/farcaster-project/containers/monero-wallet-rpc:0.18.2.2
+docker pull ghcr.io/UnstoppableSwap/containers/monerod:0.18.2.2
+docker pull ghcr.io/UnstoppableSwap/containers/monero-wallet-rpc:0.18.2.2
 
 docker create -p 18080:18080 -p 18081:18081 -p 18082:18082\
     --name monerod\
     --env NETWORK=regtest\
     --env OFFLINE=--offline\
     --env DIFFICULTY=1\
-    ghcr.io/farcaster-project/containers/monerod:0.18.2.2
+    ghcr.io/UnstoppableSwap/containers/monerod:0.18.2.2
 
 docker create -p 18083:18083\
     --name monero-wallet-rpc\
     --link monerod\
     --env MONERO_DAEMON_ADDRESS=monerod:18081\
     --env WALLET_RPC_PORT=18083\
-    ghcr.io/farcaster-project/containers/monero-wallet-rpc:0.18.2.2
+    ghcr.io/UnstoppableSwap/containers/monero-wallet-rpc:0.18.2.2
 
 docker start monerod
 docker start monero-wallet-rpc
