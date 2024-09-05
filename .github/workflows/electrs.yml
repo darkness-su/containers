@@ -28,9 +28,9 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Docker build
-        run: docker build --build-arg VRS=v${VERSION} -f $GITHUB_WORKSPACE/electrs/Dockerfile -t ghcr.io/UnstoppableSwap/containers/electrs:latest -t ghcr.io/UnstoppableSwap/containers/electrs:${VERSION} $GITHUB_WORKSPACE/electrs
+        run: docker build --build-arg VRS=v${VERSION} -f $GITHUB_WORKSPACE/electrs/Dockerfile -t ghcr.io/unstoppableswap/containers/electrs:latest -t ghcr.io/unstoppableswap/containers/electrs:${VERSION} $GITHUB_WORKSPACE/electrs
 
       - name: Docker push to GitHub Packages
         run: |
-          docker push ghcr.io/UnstoppableSwap/containers/electrs:$VERSION
-          docker push ghcr.io/UnstoppableSwap/containers/electrs:latest
+          docker push ghcr.io/unstoppableswap/containers/electrs:$VERSION
+          docker push ghcr.io/unstoppableswap/containers/electrs:latest

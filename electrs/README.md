@@ -44,13 +44,13 @@ Available listening container ports:
 ```yaml
 services:
   bitcoind:
-    image: ghcr.io/UnstoppableSwap/containers/bitcoin-core:23.0
+    image: ghcr.io/unstoppableswap/containers/bitcoin-core:23.0
     env:
       NETWORK: regtest
     volumes:
       - bitcoind-data:/data
   electrs:
-    image: ghcr.io/UnstoppableSwap/containers/electrs:0.9.9
+    image: ghcr.io/unstoppableswap/containers/electrs:0.9.9
     env:
       NETWORK: regtest
       DAEMON_RPC_ADDR: bitcoind:18443
@@ -60,18 +60,18 @@ services:
       - bitcoind-data:/data
 ```
 
-## Standalone usage with [`containers/bitcoin-core`](https://github.com/UnstoppableSwap/containers/tree/main/bitcoin-core) image
+## Standalone usage with [`containers/bitcoin-core`](https://github.com/unstoppableswap/containers/tree/main/bitcoin-core) image
 
 ```
-docker pull ghcr.io/UnstoppableSwap/containers/bitcoin-core:23.0
-docker pull ghcr.io/UnstoppableSwap/containers/electrs:0.9.9
+docker pull ghcr.io/unstoppableswap/containers/bitcoin-core:23.0
+docker pull ghcr.io/unstoppableswap/containers/electrs:0.9.9
 docker volume create --name bitcoind-data
 
 docker create -p 18443:18443 -p 18444:18444\
     --name bitcoind\
     --env NETWORK=regtest\
     -v bitcoind-data:/data\
-    ghcr.io/UnstoppableSwap/containers/bitcoin-core:23.0
+    ghcr.io/unstoppableswap/containers/bitcoin-core:23.0
 
 docker create -p 60401:60401\
     --name electrs\
@@ -81,7 +81,7 @@ docker create -p 60401:60401\
     --env NETWORK=regtest\
     --volumes-from bitcoind\
     --link bitcoind\
-    ghcr.io/UnstoppableSwap/containers/electrs:0.9.9
+    ghcr.io/unstoppableswap/containers/electrs:0.9.9
 
 docker start bitcoind
 docker start electrs

@@ -29,9 +29,9 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Docker build
-        run: docker build --build-arg VRS=v${VERSION} -f $GITHUB_WORKSPACE/monero-wallet-rpc/Dockerfile -t ghcr.io/UnstoppableSwap/containers/monero-wallet-rpc:latest -t ghcr.io/UnstoppableSwap/containers/monero-wallet-rpc:${VERSION} $GITHUB_WORKSPACE/monero-wallet-rpc
+        run: docker build --build-arg VRS=v${VERSION} -f $GITHUB_WORKSPACE/monero-wallet-rpc/Dockerfile -t ghcr.io/unstoppableswap/containers/monero-wallet-rpc:latest -t ghcr.io/unstoppableswap/containers/monero-wallet-rpc:${VERSION} $GITHUB_WORKSPACE/monero-wallet-rpc
 
       - name: Docker push to GitHub Packages
         run: |
-          docker push ghcr.io/UnstoppableSwap/containers/monero-wallet-rpc:$VERSION
-          docker push ghcr.io/UnstoppableSwap/containers/monero-wallet-rpc:latest
+          docker push ghcr.io/unstoppableswap/containers/monero-wallet-rpc:$VERSION
+          docker push ghcr.io/unstoppableswap/containers/monero-wallet-rpc:latest

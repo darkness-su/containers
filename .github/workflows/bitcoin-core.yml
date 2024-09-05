@@ -28,9 +28,9 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Docker build
-        run: docker build --build-arg VRS=${VERSION} -f $GITHUB_WORKSPACE/bitcoin-core/Dockerfile -t ghcr.io/UnstoppableSwap/containers/bitcoin-core:latest -t ghcr.io/UnstoppableSwap/containers/bitcoin-core:${VERSION} $GITHUB_WORKSPACE/bitcoin-core
+        run: docker build --build-arg VRS=${VERSION} -f $GITHUB_WORKSPACE/bitcoin-core/Dockerfile -t ghcr.io/unstoppableswap/containers/bitcoin-core:latest -t ghcr.io/unstoppableswap/containers/bitcoin-core:${VERSION} $GITHUB_WORKSPACE/bitcoin-core
 
       - name: Docker push to GitHub Packages
         run: |
-          docker push ghcr.io/UnstoppableSwap/containers/bitcoin-core:$VERSION
-          docker push ghcr.io/UnstoppableSwap/containers/bitcoin-core:latest
+          docker push ghcr.io/unstoppableswap/containers/bitcoin-core:$VERSION
+          docker push ghcr.io/unstoppableswap/containers/bitcoin-core:latest
