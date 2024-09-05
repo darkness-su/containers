@@ -8,7 +8,6 @@ A list of Docker images built for supporting **@unstoppableswap** integration te
 - **electrs**: [`electrs` image](./electrs/)
 - **monerod**: [`monerod` image](./monerod/)
 - **monero-wallet-rpc**: [`monero-wallet-rpc` image](./monero-wallet-rpc/)
-- **monero-lws**: [`monero-lws` image](./monero-lws/)
 
 ## About
 
