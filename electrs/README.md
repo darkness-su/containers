@@ -3,12 +3,12 @@
 Build the default electrs image with
 
 ```
-docker build -t electrs:0.9.9 .
+docker build -t electrs:0.10.7 .
 ```
 
 Available `build-arg`:
 
-- **VRS**: electrs version to install, default _v0.9.9_
+- **VRS**: electrs version to install, default _v0.10.7_
 
 Create a container with exposed ports for RPC connections (you need a `bitcoind` container created to link with)
 
@@ -21,7 +21,7 @@ docker create -p 60401:60401\
     --name electrs\
     --volumes-from bitcoind\
     --link bitcoind\
-    electrs:0.9.9
+    electrs:0.10.7
 ```
 
 The bitcoin _datadir_ is expected to be in the `/data` volume and can be accessed by addtionally passing for example `-v /path/to/host/folder:data` to `docker create` or `--volumes-from bitcoind`. Additionally, to access bitcoind's rpc running in another container, pass in a `--link <container>` argument with the name of the bitcoind container.
@@ -44,13 +44,13 @@ Available listening container ports:
 ```yaml
 services:
   bitcoind:
-    image: ghcr.io/unstoppableswap/containers/bitcoin-core:23.0
+    image: ghcr.io/unstoppableswap/containers/bitcoin-core:28.0
     env:
       NETWORK: regtest
     volumes:
       - bitcoind-data:/data
   electrs:
-    image: ghcr.io/unstoppableswap/containers/electrs:0.9.9
+    image: ghcr.io/unstoppableswap/containers/electrs:0.10.7
     env:
       NETWORK: regtest
       DAEMON_RPC_ADDR: bitcoind:18443
@@ -63,15 +63,15 @@ services:
 ## Standalone usage with [`containers/bitcoin-core`](https://github.com/unstoppableswap/containers/tree/main/bitcoin-core) image
 
 ```
-docker pull ghcr.io/unstoppableswap/containers/bitcoin-core:23.0
-docker pull ghcr.io/unstoppableswap/containers/electrs:0.9.9
+docker pull ghcr.io/unstoppableswap/containers/bitcoin-core:28.0
+docker pull ghcr.io/unstoppableswap/containers/electrs:0.10.7
 docker volume create --name bitcoind-data
 
 docker create -p 18443:18443 -p 18444:18444\
     --name bitcoind\
     --env NETWORK=regtest\
     -v bitcoind-data:/data\
-    ghcr.io/unstoppableswap/containers/bitcoin-core:23.0
+    ghcr.io/unstoppableswap/containers/bitcoin-core:28.0
 
 docker create -p 60401:60401\
     --name electrs\
@@ -81,7 +81,7 @@ docker create -p 60401:60401\
     --env NETWORK=regtest\
     --volumes-from bitcoind\
     --link bitcoind\
-    ghcr.io/unstoppableswap/containers/electrs:0.9.9
+    ghcr.io/unstoppableswap/containers/electrs:0.10.7
 
 docker start bitcoind
 docker start electrs
