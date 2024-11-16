@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim AS install
+FROM debian:stable-slim AS install
 
 ARG VRS
 ENV VERSION=${VRS:-28.0}
