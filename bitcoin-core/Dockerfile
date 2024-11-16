@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim AS install
 
 ARG VRS
-ENV VERSION=${VRS:-23.0}
+ENV VERSION=${VRS:-28.0}
 RUN echo $VERSION
 
 RUN apt update && apt install -y wget gpg
