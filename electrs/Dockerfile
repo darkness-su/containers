@@ -1,7 +1,7 @@
 FROM rust:latest AS install
 
 ARG VRS
-ENV VERSION=${VRS:-v0.9.9}
+ENV VERSION=${VRS:-v0.10.7}
 RUN echo $VERSION
 
 RUN apt update && apt install -y clang cmake
@@ -12,7 +12,7 @@ WORKDIR /electrs
 
 RUN cargo build --release --bin electrs
 
-FROM debian:bullseye-slim
+FROM debian:stable-slim
 
 COPY --from=install /electrs/target/release/electrs /usr/bin/electrs
 
