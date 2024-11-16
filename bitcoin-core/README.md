@@ -5,12 +5,12 @@
 Build the default bitcoin-core image with
 
 ```
-docker build -t bitcoin-core:23.0 .
+docker build -t bitcoin-core:28.0 .
 ```
 
 Available `build-arg`:
 
-- **VRS**: bitcoin-core version to install, default _23.0_
+- **VRS**: bitcoin-core version to install, default _28.0_
 
 Create a container with exposed ports for RPC and P2P connections
 
@@ -18,7 +18,7 @@ Create a container with exposed ports for RPC and P2P connections
 docker create -p 18443:18443 -p 18444:18444\
     --env NETWORK=regtest\
     --name bitcoind\
-    bitcoin-core:23.0
+    bitcoin-core:28.0
 ```
 
 The bitcoin datadir is in the `/data` volume and can be accessed by addtionally passing for example `-v /path/to/host/folder:data` to `docker create` or create a named volume with `docker volume create --name bitcoind-data` and use the flag `-v bitcoind-data:/data`.
@@ -43,7 +43,7 @@ Add a service named `bitcoind` with a named volume `bitcoind-data` mounted on `/
 ```yaml
 services:
   bitcoind:
-    image: ghcr.io/unstoppableswap/containers/bitcoin-core:23.0
+    image: ghcr.io/unstoppableswap/containers/bitcoin-core:28.0
     env:
       NETWORK: regtest
     volumes:
@@ -60,14 +60,14 @@ You probably also want to run the job in a container to bind the same named volu
 Pull the image, create a named volume, and finally create the container (here named `bitcoind`).
 
 ```
-docker pull ghcr.io/unstoppableswap/containers/bitcoin-core:23.0
+docker pull ghcr.io/unstoppableswap/containers/bitcoin-core:28.0
 mkdir data
 
 docker create -p 18443:18443 -p 18444:18444\
     --name bitcoind\
     --env NETWORK=regtest\
     -v $(pwd)/data:/data\
-    ghcr.io/unstoppableswap/containers/bitcoin-core:23.0
+    ghcr.io/unstoppableswap/containers/bitcoin-core:28.0
 
 docker start bitcoind
 sudo cat data/regtest/.cookie
